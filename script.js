@@ -25,11 +25,9 @@ window.addEventListener('load', function(){
 	let color_number2 = 1;
 	let color = 'hsl('+ random_number +', 100%, 50%)';
 	let color2 = 'hsl('+ (55 + random_number) % 360 +', 100%, 50%)';
-	let cp1x_number = .21;
-	let cp1x_display = .21;
-	let cp1y_number = .34;
-	let cp1y_display = .34;
-	let lineWidth = 34;
+	let cp1x_number = 0;
+	let cp1y_number = 65;
+	let lineWidth = 13;
 	let playing = false;
 	let sidesPlaying = false;
 	let sidesDecreasePlaying = false;
@@ -93,7 +91,6 @@ window.addEventListener('load', function(){
 	label_cp1y = document.querySelector('[for="cp1y"]');
 	slider_cp1y.addEventListener('change', function(e){
 		cp1y_number = e.target.value;
-		cp1y_display = parseInt(e.target.value);
 		updateSliders();
 		drawFractal();
 	});
@@ -105,12 +102,11 @@ window.addEventListener('load', function(){
 		ctx.beginPath();
 		ctx.lineCap = "round";
 			//ctx.drawImage(image, pointX/2, pointY/2);
-			console.log(cp1x_number);
 			ctx.beginPath();
 			ctx.moveTo(pointX,pointY);
-			ctx.bezierCurveTo(cp1x_number,cp1y_number,.55,.81, cp1x_number, cp1y_number);
+			ctx.bezierCurveTo(cp1x_number,cp1y_number,cp1x_number,cp1y_number, cp1x_number, cp1y_number);
 			ctx.stroke();
-			//drawHexagon(-13, -13);
+			//drawHexagon(13, 13);
 		for (let i = 0; i < branches; i++){
 			ctx.save();
 			ctx.translate(pointX,pointY);
@@ -124,14 +120,14 @@ window.addEventListener('load', function(){
 			ctx.restore();
 		}
 			//ctx.beginPath();
-		    ctx.moveTo(45, 45);
-    		ctx.lineTo(45, 125);
-    		ctx.lineTo(125, 45);
+		    //ctx.moveTo(45, 45);
+    		//ctx.lineTo(45, 125);
+    		//ctx.lineTo(125, 45);
 		    //ctx.fill();
 
 		    //ctx.drawImage(image, 233, 233);
 		    //ctx.drawImage(image, -233, -233);
-
+		    updateSliders();
 	}		
 
 	function drawFractal(){
@@ -144,7 +140,7 @@ window.addEventListener('load', function(){
 		ctx.scale(1,1);
 		ctx.rotate(rotateAngle);
 		for (let i = 0; i < sides; i++){
-			ctx.scale(0.89,0.89)
+			ctx.scale(0.95,0.95)
 			ctx.rotate(2.3998277);
 			drawBranch(0);
 		}
@@ -160,8 +156,8 @@ window.addEventListener('load', function(){
 		color2 = 'hsl('+ parseInt(Math.random() * 360) + ', 100%, 50%)';
 		drawFractal();
 		lineWidth = Math.floor(Math.random() * 10 + 5);
-		cp1x_number = Math.random();
-		cp1y_number = Math.random();
+		cp1x_number = Math.floor(Math.random() * 10 + 5);
+		cp1y_number = Math.floor(Math.random() * 10 + 5);
 	}
 	randomizeButton.addEventListener('click', function(){
 		randomizeFractal();
@@ -175,6 +171,8 @@ window.addEventListener('load', function(){
 		spread = 0.2;
 		color = 'hsl(290, 100%, 50%)';
 		lineWidth = 30;
+		cp1x_number = 0;
+		cp1y_number = 65;
 	}
 	resetButton.addEventListener('click', function(){
 		resetFractal();
