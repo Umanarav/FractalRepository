@@ -41,6 +41,9 @@
 #playButton {
 	width: 80px;
 }
+#resetButton {
+	width: 60px;
+}
 #playButtonCcw {
 	width: 80px;
 }
@@ -50,8 +53,8 @@
 #sidesDecreaseButton {
 	width: 80px;
 }
-#saveButton {
-	width: 80px;
+#download {
+	width: 100px;
 }
 
 

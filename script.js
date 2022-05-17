@@ -13,7 +13,7 @@ window.addEventListener('load', function(){
 
 	// effect settings
 	let size = canvas.width < canvas.height ? canvas.width * 0.1 : canvas.height * 0.1;
-	const maxLevel = 3;
+	const maxLevel = 8;
 	const branches = 1;
 
 	let sides = 13;
@@ -25,7 +25,11 @@ window.addEventListener('load', function(){
 	let color_number2 = 1;
 	let color = 'hsl('+ random_number +', 100%, 50%)';
 	let color2 = 'hsl('+ (55 + random_number) % 360 +', 100%, 50%)';
-	let lineWidth = 13;
+	let cp1x_number = .21;
+	let cp1x_display = .21;
+	let cp1y_number = .34;
+	let cp1y_display = .34;
+	let lineWidth = 34;
 	let playing = false;
 	let sidesPlaying = false;
 	let sidesDecreasePlaying = false;
@@ -36,6 +40,7 @@ window.addEventListener('load', function(){
 	const a = 2 * Math.PI / 6;
 	const r = 50;
 	const image = document.getElementById('source');
+	const download = document.getElementById('download');
 	var d = 20; //The Size of the hearting
     var k =150; // The Position of the heart
 
@@ -44,8 +49,10 @@ window.addEventListener('load', function(){
 	const randomizeButton = document.getElementById ('randomizeButton');
 	const resetButton = document.getElementById ('resetButton');
 	const playButton = document.getElementById ('playButton');
+
 	const slider_spread = document.getElementById('spread');
 	const label_spread = document.querySelector('[for="spread"]');
+
 	slider_spread.addEventListener('change', function(e){
 		spread = parseFloat(e.target.value);
 		updateSliders();
@@ -74,6 +81,22 @@ window.addEventListener('load', function(){
 		updateSliders();
 		drawFractal();
 	});
+	slider_cp1x = document.getElementById('cp1x');
+	label_cp1x = document.querySelector('[for="cp1x"]');
+	slider_cp1x.addEventListener('change', function(e){
+		cp1x_number = e.target.value;
+		cp1x_display = parseInt(e.target.value);
+		updateSliders();
+		drawFractal();
+	});
+	slider_cp1y = document.getElementById('cp1y');
+	label_cp1y = document.querySelector('[for="cp1y"]');
+	slider_cp1y.addEventListener('change', function(e){
+		cp1y_number = e.target.value;
+		cp1y_display = parseInt(e.target.value);
+		updateSliders();
+		drawFractal();
+	});
 
 	let pointX = 0;
 	let pointY = size;
@@ -82,7 +105,12 @@ window.addEventListener('load', function(){
 		ctx.beginPath();
 		ctx.lineCap = "round";
 			//ctx.drawImage(image, pointX/2, pointY/2);
-			//drawHexagon(13, 13);
+			console.log(cp1x_number);
+			ctx.beginPath();
+			ctx.moveTo(pointX,pointY);
+			ctx.bezierCurveTo(cp1x_number,cp1y_number,.55,.81, cp1x_number, cp1y_number);
+			ctx.stroke();
+			//drawHexagon(-13, -13);
 		for (let i = 0; i < branches; i++){
 			ctx.save();
 			ctx.translate(pointX,pointY);
@@ -96,12 +124,13 @@ window.addEventListener('load', function(){
 			ctx.restore();
 		}
 			//ctx.beginPath();
-		    //ctx.moveTo(45, 45);
-    		//ctx.lineTo(45, 125);
-    		//ctx.lineTo(125, 45);
+		    ctx.moveTo(45, 45);
+    		ctx.lineTo(45, 125);
+    		ctx.lineTo(125, 45);
 		    //ctx.fill();
-		    ctx.drawImage(image, 233, 233);
-		    ctx.drawImage(image, -233, -233);
+
+		    //ctx.drawImage(image, 233, 233);
+		    //ctx.drawImage(image, -233, -233);
 
 	}		
 
@@ -131,6 +160,8 @@ window.addEventListener('load', function(){
 		color2 = 'hsl('+ parseInt(Math.random() * 360) + ', 100%, 50%)';
 		drawFractal();
 		lineWidth = Math.floor(Math.random() * 10 + 5);
+		cp1x_number = Math.random();
+		cp1y_number = Math.random();
 	}
 	randomizeButton.addEventListener('click', function(){
 		randomizeFractal();
@@ -228,6 +259,15 @@ window.addEventListener('load', function(){
 			}
 		}
 	});
+
+	download.addEventListener('click', function (e) {
+	  const link = document.createElement('a');
+	  link.download = 'download.png';
+	  link.href = canvas.toDataURL();
+	  link.click();
+	  link.delete;
+	});
+
 	function updateSliders(){
 		slider_spread.value = spread;
 		label_spread.innerText = 'Spread: ' + Number(spread).toFixed(2);
@@ -237,8 +277,12 @@ window.addEventListener('load', function(){
 		label_hue_1.innerText = 'Fill Color: ' + (color);
 		slider_hue_2.value = color_number2;
 		label_hue_2.innerText = 'Stroke Color: ' + (color2);
-
+		slider_cp1x.value = cp1x_number;
+		label_cp1x.innerText = 'cp1x: ' + Number(cp1x_number).toFixed(2); 
+		slider_cp1y.value = cp1y_number;
+		label_cp1y.innerText = 'cp1y: ' + Number(cp1y_number).toFixed(2);
 	}
+
 	updateSliders;
 
 	window.addEventListener('resize', function(){
@@ -259,12 +303,13 @@ window.addEventListener('load', function(){
 			controls.style.display = "none";
 		}
 	});
+
 function drawHexagon(x, y) {
   ctx.beginPath();
   for (var i = 0; i < 6; i++) {
-    ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
-  }
-  ctx.fill();
-}
+	ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+  	}
+  	ctx.fill();
+	}
 
 });
