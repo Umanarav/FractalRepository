@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Canvas Tutorial</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<canvas id="canvas1"></canvas>
+	<div id="controls">
+		<button id="randomizeButton">Randomize!</button>
+		<div>
+			<input id="spread" type="range" min="-0.3" max="15" step="0.01" value="1">
+			<label for="spread">Spread: </label>
+		</div>
+		<div>
+			<input id="sides" type="range" min="2" max="89" step="1" value="5">
+			<label for="sides">Sides: </label>
+		</div>
+		<div>
+			<input id="Hue_1" type="range" min="1" max="359" step="1" value="5">
+			<label for="Hue_1">Fill Color </label>
+		</div>
+		<div>
+			<input id="Hue_2" type="range" min="0" max="359" step="1" value="5">
+			<label for="Hue_2">Stroke Color </label>
+		</div>
+		<button id="resetButton">Reset</button>
+		<button id="playButton">CW></button>
+		<button id="playButtonCcw">CCW<</button>
+		<button id="sidesButton">Sides+</button>
+		<button id="sidesDecreaseButton">Sides-</button>
+		<button id="saveButton">Save</button>
+	</div>
+	<div id="ToggleControls">
+		<button id="ToggleControlsButton">Toggle Controls</button>
+	</div>
+	<div style="display:none;">
+		<img id="source"
+			src="image.png"
+			width="493px" height="657px">
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
