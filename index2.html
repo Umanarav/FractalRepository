@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Canvas Tutorial</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style2.css">
 </head>
 
 <body>
@@ -12,18 +12,18 @@
 	<div id="controls">
 		<button id="randomizeButton">Randomize!</button>
 		<div>
-			<input id="spread" type="range" min="-0.3" max="15" step="0.1" value="1">
+			<input id="spread" type="range" min="-0.3" max="15" step="0.01" value="1">
 			<label for="spread">Spread: </label>
 		</div>
 		<div>
-			<input id="sides" type="range" min="1" max="144" step="1" value="5">
+			<input id="sides" type="range" min="2" max="89" step="1" value="5">
 			<label for="sides">Sides: </label>
 		</div>
 		<div>
 			<input id="Hue_1" type="range" min="1" max="359" step="1" value="5">
 			<label for="Hue_1">Fill Color </label>
 		</div>
-		<div>
+		<div id="stroke_color">
 			<input id="Hue_2" type="range" min="0" max="359" step="1" value="5">
 			<label for="Hue_2">Stroke Color </label>
 		</div>
@@ -31,13 +31,19 @@
 			<input id="scale_variable" type="range" min="0" max="3" step="0.01" value="1">
 			<label for="scale_variable">Scale: </label>
 		</div>
-		<div>
-			<input id="cp1x" type="range" min="0" max="255" step="1" value="1 ">
-			<label for="cp1x">cp1x:</label>
+		<div id="bezier_handles">
+			<div>
+				<input id="cp1x" type="range" min="0" max="255" step="1" value="1 ">
+				<label for="cp1x">X</label>
+			</div>
+			<div>
+				<input id="cp1y" type="range" min="0" max="255" step="1" value="1">
+				<label for="cp1y">Y</label>
+			</div>
 		</div>
 		<div>
-			<input id="cp1y" type="range" min="0" max="255" step="1" value="1">
-			<label for="cp1y">cp1y:</label>
+			<input id="rotate" type="range" min="-50" max="50" step="1" value="1">
+			<label for="rotate">Rotate variable:</label>
 		</div>
 		<button id="resetButton">Reset</button>
 		<button id="playButton">CW></button>
@@ -58,7 +64,10 @@
 			src="image.png"
 			width="493px" height="657px">
 	</div>
-	<script src="script.js">
+	<div>
+		
+	</div>
+	<script src="script2.js">
 		const input = document.createElement("input");
 		input.setAttribute("type", "text");
 		document.body.appendChild(input);

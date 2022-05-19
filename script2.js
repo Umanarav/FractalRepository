@@ -16,18 +16,19 @@ window.addEventListener('load', function(){
 	const maxLevel = 13;
 	const branches = 1;
 
-	let sides = 144;
-	let scale = .99;
-	let spread = .0;
+	let sides = 13;
+	let scale = .89;
+	let spread = 0;
 	let random_number = Math.random() * 360;
 	let fixed_number = 1
 	let color_number = 1;
 	let color_number2 = 1;
 	let color = 'hsl('+ random_number +', 100%, 50%)';
 	let color2 = 'hsl('+ (55 + random_number) % 360 +', 100%, 50%)';
-	let cp1x_number = 1;
-	let cp1y_number = 66;
-	let scale_number = .99;
+	let cp1x_number = 0;
+	let cp1y_number = 13;
+	let rotate_number = 2.3998277;
+	let scale_number = .89;
 	let lineWidth = 13;
 	let playing = false;
 	let sidesPlaying = false;
@@ -102,6 +103,14 @@ window.addEventListener('load', function(){
 		updateSliders();
 		drawFractal();
 	});
+	slider_rotate = document.getElementById('rotate');
+	label_rotate = document.querySelector('[for="rotate"]');
+	slider_rotate.addEventListener('change', function(e){
+		rotate_number = parseInt(e.target.value);
+		updateSliders();
+		drawFractal();
+	});
+
 	let pointX = 0;
 	let pointY = size;
 	function drawBranch(level){
@@ -109,15 +118,15 @@ window.addEventListener('load', function(){
 		ctx.beginPath();
 		ctx.lineCap = "round";
 			//ctx.drawImage(image, pointX/2, pointY/2);
-			ctx.beginPath();
-			ctx.moveTo(pointX,pointY);
-			ctx.bezierCurveTo(cp1x_number,cp1y_number,cp1x_number,cp1y_number, cp1x_number, cp1y_number);
-			ctx.stroke();
-			//drawHexagon(cp1x_number, cp1y_number);
+			//ctx.beginPath();
+			//ctx.moveTo(pointX,pointY);
+			//ctx.bezierCurveTo(cp1x_number,cp1y_number,cp1x_number,cp1y_number, cp1x_number, cp1y_number);
+			//ctx.stroke();
+			drawHexagon(pointX, pointY);
 		for (let i = 0; i < branches; i++){
 			ctx.save();
 			ctx.translate(pointX,pointY);
-			ctx.scale(scale_number, scale_number);
+			ctx.scale(scale, scale);
 
 			ctx.save();
 			ctx.rotate(spread);
@@ -132,7 +141,7 @@ window.addEventListener('load', function(){
     		//ctx.lineTo(cp1y_number, cp1x_number);
 		    //ctx.fill();
 
-		    //ctx.drawImage(image, 25, 25);
+		    //ctx.drawImage(image, 233, 233);
 		    //ctx.drawImage(image, -233, -233);
 		    updateSliders();
 	}		
@@ -147,9 +156,9 @@ window.addEventListener('load', function(){
 		ctx.scale(1,1);
 		ctx.rotate(rotateAngle);
 		for (let i = 0; i < sides; i++){
-			ctx.scale(scale_number, scale_number)
-			ctx.rotate(2.3998277);
-			drawBranch(0);
+			ctx.scale(scale_number, scale_number);
+			ctx.rotate((Math.PI * rotate_number)/sides);
+			drawBranch(1);
 		}
 		ctx.restore();
 		randomizeButton.style.backgroundColor = color;
@@ -165,6 +174,7 @@ window.addEventListener('load', function(){
 		lineWidth = Math.floor(Math.random() * 10 + 5);
 		cp1x_number = Math.floor(Math.random() * 10 + 5);
 		cp1y_number = Math.floor(Math.random() * 10 + 5);
+		rotate_number = Math.floor(Math.random() * 15 + 10);
 	}
 	randomizeButton.addEventListener('click', function(){
 		randomizeFractal();
@@ -173,13 +183,13 @@ window.addEventListener('load', function(){
 	});
 
 	function resetFractal(){
-		sides = 144;
+		sides = 13;
 		scale = 0.89;
 		spread = 0;
 		color = 'hsl(290, 100%, 50%)';
 		lineWidth = 30;
-		cp1x_number = 1;
-		cp1y_number = 55;
+		cp1x_number = 13;
+		cp1y_number = 13;
 		updateSliders();
 	}
 	resetButton.addEventListener('click', function(){
@@ -191,11 +201,12 @@ window.addEventListener('load', function(){
 	playButton.addEventListener('click', function(){
 		if (playing === false){
 			playing = true;
-			myInterval = setInterval(myTimer, 16.7);
+			myInterval = setInterval(myTimer, 100);
 			function myTimer() {
-				spread += 0.001
+				spread += 0.01
 				fixed_number += 1
-				rotateAngle += 0.0174533
+				rotateAngle += .023998277
+				//rotate_number += .023998277;
 				color = 'hsl('+ fixed_number +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
@@ -214,13 +225,15 @@ window.addEventListener('load', function(){
 			playing = true;
 			myInterval = setInterval(myTimer, 100);
 			function myTimer() {
-				spread -= 0.1
+				spread -= 0.01
 				fixed_number -= 1
 				rotateAngle -= 0.0174533
+				//rotate_number -= .023998277;
 				color = 'hsl('+ fixed_number +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
 			}
+		} else {
 			myStop();
 			function myStop() {
 				playing = false;
@@ -274,7 +287,7 @@ window.addEventListener('load', function(){
 	});
 	function updateSliders(){
 		slider_spread.value = spread;
-		label_spread.innerText = 'Spread: ' + Number(spread).toFixed(4);
+		label_spread.innerText = 'Spread: ' + Number(spread).toFixed(2);
 		slider_sides.value = sides;
 		label_sides.innerText = 'sides: ' + Number(sides).toFixed(0);
 		slider_hue_1.value = color_number;
@@ -282,11 +295,13 @@ window.addEventListener('load', function(){
 		slider_hue_2.value = color_number2;
 		label_hue_2.innerText = 'Stroke Color: ' + (color2);
 		slider_cp1x.value = cp1x_number;
-		label_cp1x.innerText = 'cp1x: ' + Number(cp1x_number).toFixed(2); 
+		label_cp1x.innerText = 'X: ' + Number(cp1x_number).toFixed(0); 
 		slider_cp1y.value = cp1y_number;
-		label_cp1y.innerText = 'cp1y: ' + Number(cp1y_number).toFixed(2);
+		label_cp1y.innerText = 'Y: ' + Number(rotate_number).toFixed(0);
+		slider_rotate.value = rotate_number;
+		label_rotate.innerText = 'rotate variable: ' + Number(rotate_number).toFixed(2);
 		slider_scale_variable.value = scale_number;
-		label_scale_variable.innerText = 'scale: ' + Number(scale_number).toFixed(3);
+		label_scale_variable.innerText = 'scale: ' + Number(scale_number).toFixed(2);
 	}
 
 	updateSliders;

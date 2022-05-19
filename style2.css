@@ -35,6 +35,15 @@
 	width:  100px;
 	font-size: 13px;
 }
+
+#stroke_color {
+	display: none;
+}
+
+#bezier_handles {
+	display:  none;
+}
+
 #playbox {
 	position: absolute;
 	left: 600px;
