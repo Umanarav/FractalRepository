@@ -42,6 +42,7 @@ window.addEventListener('load', function(){
 	const download = document.getElementById('download');
 	var d = 20; //The Size of the hearting
     var k =150; // The Position of the heart
+    var elem = document.documentElement;
 
    
 	// controls
@@ -174,7 +175,7 @@ window.addEventListener('load', function(){
 
 	function resetFractal(){
 		sides = 144;
-		scale = 0.990;
+		scale_number = 0.980;
 		spread = 0;
 		color = 'hsl(290, 100%, 50%)';
 		lineWidth = 13;
@@ -277,6 +278,29 @@ window.addEventListener('load', function(){
 	  link.click();
 	  link.delete;
 	});
+
+	let fullscreenButton = document.getElementById("fullscreenButton");
+	fullscreenButton.addEventListener('click', function () {
+	  if (elem.requestFullscreen) {
+	    elem.requestFullscreen();
+	  } else if (elem.webkitRequestFullscreen) { /* Safari */
+	    elem.webkitRequestFullscreen();
+	  } else if (elem.msRequestFullscreen) { /* IE11 */
+	    elem.msRequestFullscreen();
+	  }
+	});
+
+	let closeFullscreen = document.getElementById("closeFullscreen");
+	closeFullscreen.addEventListener('click', function () {
+			  if (document.exitFullscreen) {
+		    document.exitFullscreen();
+		  } else if (document.webkitExitFullscreen) { /* Safari */
+		    document.webkitExitFullscreen();
+		  } else if (document.msExitFullscreen) { /* IE11 */
+		    document.msExitFullscreen();
+		  }
+		});
+
 	function updateSliders(){
 		slider_spread.value = spread;
 		label_spread.innerText = 'Spread: ' + Number(spread).toFixed(4);
