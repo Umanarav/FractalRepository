@@ -26,14 +26,8 @@
 }
 #ToggleControls {
 	position: fixed;
-	bottom: 100;
-	right: 250;
+	right: 80%;
 	width: 100px;
-}
-#ToggleControlsButton {
-	padding: 20 px, 20px;
-	width:  100px;
-	font-size: 13px;
 }
 #playbox {
 	position: absolute;
@@ -71,6 +65,12 @@ button {
 label, input {
 	color:  white;
 	font-size: 20px;
+}
+
+#ToggleControlsButton {
+	padding: 20 px, 20px;
+	width:  100px;
+	font-size: 13px;
 }
 
 
