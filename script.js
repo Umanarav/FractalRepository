@@ -157,14 +157,14 @@ window.addEventListener('load', function(){
 	drawFractal();
 
 	function randomizeFractal(){
-		sides = Math.random() * 18 + 2;
-		spread = Math.random() * 0.6 -0.3;
+		spread = Math.random() * 3 + -1;
+		sides = Math.random() * 144 + 1;
 		color = 'hsl('+ parseInt(Math.random() * 360) + ', 100%, 50%)';
 		color2 = 'hsl('+ parseInt(Math.random() * 360) + ', 100%, 50%)';
-		drawFractal();
 		lineWidth = Math.floor(Math.random() * 10 + 5);
-		cp1x_number = Math.floor(Math.random() * 10 + 5);
-		cp1y_number = Math.floor(Math.random() * 10 + 5);
+		cp1x_number = Math.floor(Math.random() * 200 + 1);
+		cp1y_number = Math.floor(Math.random() * 200 + 1);
+		drawFractal();
 	}
 	randomizeButton.addEventListener('click', function(){
 		randomizeFractal();
@@ -174,12 +174,12 @@ window.addEventListener('load', function(){
 
 	function resetFractal(){
 		sides = 144;
-		scale = 0.89;
+		scale = 0.990;
 		spread = 0;
 		color = 'hsl(290, 100%, 50%)';
-		lineWidth = 30;
+		lineWidth = 13;
 		cp1x_number = 1;
-		cp1y_number = 55;
+		cp1y_number = 66;
 		updateSliders();
 	}
 	resetButton.addEventListener('click', function(){
@@ -196,6 +196,7 @@ window.addEventListener('load', function(){
 				spread += 0.001
 				fixed_number += 1
 				rotateAngle += 0.0174533
+				scale_number += 0.0001
 				color = 'hsl('+ fixed_number +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
@@ -210,17 +211,21 @@ window.addEventListener('load', function(){
 	});
 
 	playButtonCcw.addEventListener('click', function(){
+		console.log(playing);
 		if (playing === false){
+			console.log(playing);
 			playing = true;
-			myInterval = setInterval(myTimer, 100);
+			myInterval = setInterval(myTimer, 16.7);
 			function myTimer() {
-				spread -= 0.1
+				spread -= 0.001
 				fixed_number -= 1
 				rotateAngle -= 0.0174533
+				scale_number -= 0.0001
 				color = 'hsl('+ fixed_number +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
 			}
+		} else {	
 			myStop();
 			function myStop() {
 				playing = false;
@@ -310,13 +315,13 @@ window.addEventListener('load', function(){
 		}
 	});
 
-function drawHexagon(x, y) {
-  ctx.beginPath();
-  for (var i = 0; i < 6; i++) {
-	ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
-  	}
-  	ctx.fill();
-	}
+	function drawHexagon(x, y) {
+  		ctx.beginPath();
+  			for (var i = 0; i < 6; i++) {
+				ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+			  	}
+			  	ctx.fill();
+				}
 
 });
 
