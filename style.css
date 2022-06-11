@@ -60,6 +60,15 @@
 #Hue_2 {
 }
 
+#cp1yPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#cp1yMinusButton {
+	width: 20px;
+	height:  22px;
+}
+
 
 button {
 	padding: 10 px 40px;

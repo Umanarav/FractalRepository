@@ -190,6 +190,17 @@ window.addEventListener('load', function(){
 		drawFractal();
 	});
 
+	cp1yMinusButton.addEventListener('click', function(){
+		cp1y_number -= 1
+		updateSliders();
+		drawFractal();
+	});
+	cp1yPlusButton.addEventListener('click', function(){
+		cp1y_number += 1
+		updateSliders();
+		drawFractal();
+	});
+
 	playButton.addEventListener('click', function(){
 		if (playing === false){
 			playing = true;
