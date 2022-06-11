@@ -36,6 +36,7 @@ window.addEventListener('load', function(){
 	let myInterval2;
 	let myInterval3;
 	let rotateAngle = 0.0174533;
+	let rafReference
 	const a = 2 * Math.PI / 6;
 	const r = 50;
 	const image = document.getElementById('source');
@@ -192,7 +193,7 @@ window.addEventListener('load', function(){
 	playButton.addEventListener('click', function(){
 		if (playing === false){
 			playing = true;
-			myInterval = setInterval(myTimer, 16.7);
+			requestAnimationFrame(myTimer)
 			function myTimer() {
 				spread += 0.001
 				fixed_number += 1
@@ -201,22 +202,21 @@ window.addEventListener('load', function(){
 				color = 'hsl('+ fixed_number +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
+				rafReference = requestAnimationFrame(myTimer)
 			}
 		} else {
 			myStop();
 			function myStop() {
 				playing = false;
-				clearInterval(myInterval);
+				cancelAnimationFrame(rafReference)
 			}
 		}
 	});
 
 	playButtonCcw.addEventListener('click', function(){
-		console.log(playing);
 		if (playing === false){
-			console.log(playing);
 			playing = true;
-			myInterval = setInterval(myTimer, 16.7);
+			requestAnimationFrame(myTimer)
 			function myTimer() {
 				spread -= 0.001
 				fixed_number -= 1
@@ -225,12 +225,13 @@ window.addEventListener('load', function(){
 				color = 'hsl('+ fixed_number +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
+				rafReference = requestAnimationFrame(myTimer)
 			}
 		} else {	
 			myStop();
 			function myStop() {
 				playing = false;
-				clearInterval(myInterval);
+				cancelAnimationFrame(rafReference)
 			}
 		}
 	});
