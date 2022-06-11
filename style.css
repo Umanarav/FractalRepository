@@ -20,7 +20,7 @@
 	border:  2px solid white;
 	left:  20px;
 	top: 20px;
-	width: 200 px;
+	width: 350px;
 	background: rgba(255,255,255,.15);
 	font-size: 13px;
 }
@@ -37,13 +37,15 @@
 	font-size: 13px;
 }
 #playButton {
-	width: 80px;
+	width: 100px;
 }
 #resetButton {
+	position: absolute;
+	right: 20px;
 	width: 60px;
 }
 #playButtonCcw {
-	width: 80px;
+	width: 100px;
 }
 #sidesButton {
 	width: 80px;
@@ -55,6 +57,8 @@
 	width: 100px;
 }
 
+#Hue_2 {
+}
 
 
 button {
