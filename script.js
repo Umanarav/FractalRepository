@@ -26,7 +26,7 @@ window.addEventListener('load', function(){
 	let color = 'hsl('+ random_number +', 100%, 50%)';
 	let color2 = 'hsl('+ (55 + random_number) % 360 +', 100%, 50%)';
 	let cp1x_number = 1;
-	let cp1y_number = 95;
+	let cp1y_number = 96;
 	let scale_number = .99;
 	let lineWidth = 13;
 	let playing = false;
