@@ -20,7 +20,7 @@ window.addEventListener('load', function(){
 	let scale = .99;
 	let spread = .0;
 	let random_number = Math.random() * 360;
-	let fixed_number = 1
+	let color_numberDisplay = 1
 	let color_number = 1;
 	let color_number2 = 1;
 	let color = 'hsl('+ random_number +', 100%, 50%)';
@@ -195,11 +195,11 @@ window.addEventListener('load', function(){
 			playing = true;
 			requestAnimationFrame(myTimer)
 			function myTimer() {
-				spread += 0.001
-				fixed_number += 1
+				spread += 0.0001
+				color_numberDisplay += 1
 				rotateAngle += 0.0174533
 				scale_number += 0.0001
-				color = 'hsl('+ fixed_number +' , 100%, 50%)';
+				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
 				rafReference = requestAnimationFrame(myTimer)
@@ -218,11 +218,11 @@ window.addEventListener('load', function(){
 			playing = true;
 			requestAnimationFrame(myTimer)
 			function myTimer() {
-				spread -= 0.001
-				fixed_number -= 1
+				spread -= 0.0001
+				color_numberDisplay -= 1
 				rotateAngle -= 0.0174533
 				scale_number -= 0.0001
-				color = 'hsl('+ fixed_number +' , 100%, 50%)';
+				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
 				rafReference = requestAnimationFrame(myTimer)
