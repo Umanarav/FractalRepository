@@ -36,7 +36,10 @@ window.addEventListener('load', function(){
 	let myInterval2;
 	let myInterval3;
 	let rotateAngle = 0.0174533;
-	let rafReference
+	let radian_number = 0.0174533;
+	let degrees_number = 1;
+	let rafReference;
+	let textboxDegreesNumber = document.getElementById("degrees-number");
 	const a = 2 * Math.PI / 6;
 	const r = 50;
 	const image = document.getElementById('source');
@@ -82,6 +85,13 @@ window.addEventListener('load', function(){
 		updateSliders();
 		drawFractal();
 	});
+	slider_scale_variable = document.getElementById('scale_variable');
+	label_scale_variable = document.querySelector('[for="scale_variable"]');
+	slider_scale_variable.addEventListener('change', function(e){
+		scale_number = e.target.value;
+		updateSliders();
+		drawFractal();
+	});
 	slider_cp1x = document.getElementById('cp1x');
 	label_cp1x = document.querySelector('[for="cp1x"]');
 	slider_cp1x.addEventListener('change', function(e){
@@ -97,13 +107,15 @@ window.addEventListener('load', function(){
 		updateSliders();
 		drawFractal();
 	});
-	slider_scale_variable = document.getElementById('scale_variable');
-	label_scale_variable = document.querySelector('[for="scale_variable"]');
-	slider_scale_variable.addEventListener('change', function(e){
-		scale_number = e.target.value;
+	slider_radian = document.getElementById('radian');
+	label_radian = document.querySelector('[for="radian"]');
+	slider_radian.addEventListener('change', function(e){
+		radian_number = e.target.value;
+		console.log(radian_number);
 		updateSliders();
 		drawFractal();
 	});
+
 	let pointX = 0;
 	let pointY = size;
 	function drawBranch(level){
@@ -200,6 +212,26 @@ window.addEventListener('load', function(){
 		updateSliders();
 		drawFractal();
 	});
+	radianMinusButton.addEventListener('click', function(){
+		radian_number -= 0.0174533
+		updateSliders();
+		drawFractal();
+	});
+
+	textboxDegreesNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			radian_number = (document.getElementById("degrees-number").value) * Math.PI/180;
+			console.log(degrees_number);
+			updateSliders();
+		}
+	})
+	
+	radianPlusButton.addEventListener('click', function(){
+		radian_number += 0.0174533
+		updateSliders();
+		drawFractal();
+	});
 
 	playButton.addEventListener('click', function(){
 		if (playing === false){
@@ -208,7 +240,7 @@ window.addEventListener('load', function(){
 			function myTimer() {
 				spread += 0.0001
 				color_numberDisplay += 1
-				rotateAngle += 0.0174533
+				rotateAngle += radian_number
 				scale_number += 0.0001
 				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
 				updateSliders();
@@ -231,7 +263,7 @@ window.addEventListener('load', function(){
 			function myTimer() {
 				spread -= 0.0001
 				color_numberDisplay -= 1
-				rotateAngle -= 0.0174533
+				rotateAngle -= radian_number
 				scale_number -= 0.0001
 				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
 				updateSliders();
@@ -322,12 +354,15 @@ window.addEventListener('load', function(){
 		label_hue_1.innerText = 'Fill Color: ' + (color);
 		slider_hue_2.value = color_number2;
 		label_hue_2.innerText = 'Stroke Color: ' + (color2);
+		slider_scale_variable.value = scale_number;
+		label_scale_variable.innerText = 'scale: ' + Number(scale_number).toFixed(3);
 		slider_cp1x.value = cp1x_number;
 		label_cp1x.innerText = 'cp1x: ' + Number(cp1x_number).toFixed(2); 
 		slider_cp1y.value = cp1y_number;
 		label_cp1y.innerText = 'cp1y: ' + Number(cp1y_number).toFixed(2);
-		slider_scale_variable.value = scale_number;
-		label_scale_variable.innerText = 'scale: ' + Number(scale_number).toFixed(3);
+		slider_radian.value = radian_number;
+		degrees_number = (radian_number * (180/Math.PI));
+		textboxDegreesNumber.value = Number(degrees_number).toFixed(1);
 	}
 
 	updateSliders;
