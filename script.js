@@ -19,7 +19,8 @@ window.addEventListener('load', function(){
 	let sides = 144;
 	let scale = .99;
 	let spread = .0;
-	let random_number = Math.random() * 360;
+	let spreadIncrement_number = .0001;
+	let random_number = Math.ceil(Math.random() * 360);
 	let color_numberDisplay = 1
 	let color_number = 1;
 	let color_number2 = 1;
@@ -27,7 +28,8 @@ window.addEventListener('load', function(){
 	let color2 = 'hsl('+ (55 + random_number) % 360 +', 100%, 50%)';
 	let cp1x_number = 1;
 	let cp1y_number = 95;
-	let scale_number = .99;
+	let scale_number = .9900;
+	let scaleIncrement_number = .0001;
 	let lineWidth = 13;
 	let playing = false;
 	let sidesPlaying = false;
@@ -39,13 +41,18 @@ window.addEventListener('load', function(){
 	let radian_number = 0.0174533;
 	let degrees_number = 1;
 	let rafReference;
+	let textboxSpreadNumber = document.getElementById("spreadBox");
+	let textboxSpreadIncrementNumber = document.getElementById("spreadIncrementBox");
 	let textboxDegreesNumber = document.getElementById("degrees-number");
+	let textboxCp1yNumber = document.getElementById("cp1yBox");
+	let textboxCp1xNumber = document.getElementById("cp1xBox");
+	let textboxSidesNumber = document.getElementById("sidesBox");
+	let textboxScaleNumber = document.getElementById("scaleBox");
+	let textboxScaleIncrementNumber = document.getElementById("scaleIncrementBox");
 	const a = 2 * Math.PI / 6;
 	const r = 50;
 	const image = document.getElementById('source');
 	const download = document.getElementById('download');
-	var d = 20; //The Size of the hearting
-    var k =150; // The Position of the heart
     var elem = document.documentElement;
 
    
@@ -59,6 +66,13 @@ window.addEventListener('load', function(){
 
 	slider_spread.addEventListener('change', function(e){
 		spread = parseFloat(e.target.value);
+		updateSliders();
+		drawFractal();
+	});
+	slider_spread_increment = document.getElementById('spread_increment');
+	label_spread_increment = document.querySelector('[for="spread_increment"]');
+	slider_spread_increment.addEventListener('change', function(e){
+		spread_increment_number = e.target.value;
 		updateSliders();
 		drawFractal();
 	});
@@ -89,6 +103,13 @@ window.addEventListener('load', function(){
 	label_scale_variable = document.querySelector('[for="scale_variable"]');
 	slider_scale_variable.addEventListener('change', function(e){
 		scale_number = e.target.value;
+		updateSliders();
+		drawFractal();
+	});
+	slider_scale_increment = document.getElementById('scale_increment');
+	label_scale_increment = document.querySelector('[for="scale_increment"]');
+	slider_scale_increment.addEventListener('change', function(e){
+		scale_increment_number = e.target.value;
 		updateSliders();
 		drawFractal();
 	});
@@ -127,7 +148,7 @@ window.addEventListener('load', function(){
 			ctx.moveTo(pointX,pointY);
 			ctx.bezierCurveTo(cp1x_number,cp1y_number,cp1x_number,cp1y_number, cp1x_number, cp1y_number);
 			ctx.stroke();
-			//drawHexagon(cp1x_number, cp1y_number);
+			//drawHexagon(55, 89);
 		for (let i = 0; i < branches; i++){
 			ctx.save();
 			ctx.translate(pointX,pointY);
@@ -194,6 +215,7 @@ window.addEventListener('load', function(){
 		lineWidth = 13;
 		cp1x_number = 1;
 		cp1y_number = 66;
+		rotateAngle = 0.0174533;
 		updateSliders();
 	}
 	resetButton.addEventListener('click', function(){
@@ -202,6 +224,66 @@ window.addEventListener('load', function(){
 		drawFractal();
 	});
 
+	spreadMinusButton.addEventListener('click', function(){
+		spread -= .0001
+		updateSliders();
+		drawFractal();
+	});
+	spreadPlusButton.addEventListener('click', function(){
+		spread += .0001
+		updateSliders();
+		drawFractal();
+	});
+	spreadIncrementMinusButton.addEventListener('click', function(){
+		spreadIncrement_number -= .0001
+		updateSliders();
+		drawFractal();
+	});
+	spreadIncrementPlusButton.addEventListener('click', function(){
+		spreadIncrement_number += .0001
+		updateSliders();
+		drawFractal();
+	});
+	sidesMinusButton.addEventListener('click', function(){
+		sides -= 1
+		updateSliders();
+		drawFractal();
+	});
+	sidesPlusButton.addEventListener('click', function(){
+		sides += 1
+		updateSliders();
+		drawFractal();
+	});
+	scaleMinusButton.addEventListener('click', function(){
+		scale_number -= scaleIncrement_number
+		updateSliders();
+		drawFractal();
+	});
+	scalePlusButton.addEventListener('click', function(){
+		scale_number += scaleIncrement_number
+		updateSliders();
+		drawFractal();
+	});
+	scaleIncrementMinusButton.addEventListener('click', function(){
+		scaleIncrement_number -= .0001
+		updateSliders();
+		drawFractal();
+	});
+	scaleIncrementPlusButton.addEventListener('click', function(){
+		scaleIncrement_number += .0001
+		updateSliders();
+		drawFractal();
+	});
+	cp1xMinusButton.addEventListener('click', function(){
+		cp1x_number -= 1
+		updateSliders();
+		drawFractal();
+	});
+	cp1xPlusButton.addEventListener('click', function(){
+		cp1x_number += 1
+		updateSliders();
+		drawFractal();
+	});
 	cp1yMinusButton.addEventListener('click', function(){
 		cp1y_number -= 1
 		updateSliders();
@@ -218,12 +300,76 @@ window.addEventListener('load', function(){
 		drawFractal();
 	});
 
+	textboxSpreadNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			spread = document.getElementById("spreadBox").value;
+			console.log(sides);
+			updateSliders();
+			drawFractal();
+		}
+	})
+	textboxSpreadIncrementNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			spreadIncrement_number = document.getElementById("spreadIncrementBox").value;
+			console.log(spreadIncrement_number);
+			updateSliders();
+			drawFractal();
+		}
+	})
+	textboxSidesNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			sides = document.getElementById("sidesBox").value;
+			console.log(sides);
+			updateSliders();
+			drawFractal();
+		}
+	})
+	textboxScaleNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			sides = document.getElementById("scaleBox").value;
+			console.log(scale_number);
+			updateSliders();
+			drawFractal();
+		}
+	})
+	textboxScaleIncrementNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			scaleIncrement_number = document.getElementById("scaleIncrementBox").value;
+			console.log(scaleIncrement_number);
+			updateSliders();
+			drawFractal();
+		}
+	})
+	textboxCp1xNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			cp1x_number = document.getElementById("cp1xBox").value;
+			console.log(cp1x_number);
+			updateSliders();
+			drawFractal();
+		}
+	})
+	textboxCp1yNumber.addEventListener('keypress', (event) =>{
+		console.log(event);
+		if (event.key === 'Enter') {
+			cp1y_number = document.getElementById("cp1yBox").value;
+			console.log(cp1y_number);
+			updateSliders();
+			drawFractal();
+		}
+	})
 	textboxDegreesNumber.addEventListener('keypress', (event) =>{
 		console.log(event);
 		if (event.key === 'Enter') {
 			radian_number = (document.getElementById("degrees-number").value) * Math.PI/180;
 			console.log(degrees_number);
 			updateSliders();
+			drawFractal();
 		}
 	})
 	
@@ -238,10 +384,10 @@ window.addEventListener('load', function(){
 			playing = true;
 			requestAnimationFrame(myTimer)
 			function myTimer() {
-				spread += 0.0001
+				spread += spreadIncrement_number
 				color_numberDisplay += 1
 				rotateAngle += radian_number
-				scale_number += 0.0001
+				scale_number += scaleIncrement_number
 				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
@@ -252,65 +398,6 @@ window.addEventListener('load', function(){
 			function myStop() {
 				playing = false;
 				cancelAnimationFrame(rafReference)
-			}
-		}
-	});
-
-	playButtonCcw.addEventListener('click', function(){
-		if (playing === false){
-			playing = true;
-			requestAnimationFrame(myTimer)
-			function myTimer() {
-				spread -= 0.0001
-				color_numberDisplay -= 1
-				rotateAngle -= radian_number
-				scale_number -= 0.0001
-				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
-				updateSliders();
-				drawFractal();
-				rafReference = requestAnimationFrame(myTimer)
-			}
-		} else {	
-			myStop();
-			function myStop() {
-				playing = false;
-				cancelAnimationFrame(rafReference)
-			}
-		}
-	});
-
-	sidesButton.addEventListener('click', function(){
-		if (sidesPlaying === false){
-			sidesPlaying = true;
-			myInterval2 = setInterval(myTimer2, 500)
-			function myTimer2() {
-				sides +=1
-				updateSliders();
-				drawFractal()
-			}
-		} else {
-			myStop2();
-			function myStop2(){
-				sidesPlaying = false;
-				clearInterval(myInterval2)
-			}
-		}
-	});
-
-	sidesDecreaseButton.addEventListener('click', function(){
-		if (sidesPlaying === false){
-			sidesPlaying = true;
-			myInterval2 = setInterval(myTimer2, 500)
-			function myTimer2() {
-				sides -=1
-				updateSliders();
-				drawFractal()
-			}
-		} else {
-			myStop2();
-			function myStop2(){
-				sidesPlaying = false;
-				clearInterval(myInterval2)
 			}
 		}
 	});
@@ -334,38 +421,31 @@ window.addEventListener('load', function(){
 	  }
 	});
 
-	let closeFullscreen = document.getElementById("closeFullscreen");
-	closeFullscreen.addEventListener('click', function () {
-			  if (document.exitFullscreen) {
-		    document.exitFullscreen();
-		  } else if (document.webkitExitFullscreen) { /* Safari */
-		    document.webkitExitFullscreen();
-		  } else if (document.msExitFullscreen) { /* IE11 */
-		    document.msExitFullscreen();
-		  }
-		});
-
 	function updateSliders(){
 		slider_spread.value = spread;
-		label_spread.innerText = 'Spread: ' + Number(spread).toFixed(4);
+		textboxSpreadNumber.value = Number(spread).toFixed(5);
+		slider_spread_increment.value = spreadIncrement_number;
+		textboxSpreadIncrementNumber.value = Number(spreadIncrement_number).toFixed(5);
 		slider_sides.value = sides;
-		label_sides.innerText = 'sides: ' + Number(sides).toFixed(0);
+		textboxSidesNumber.value = Number(sides).toFixed(0);
 		slider_hue_1.value = color_number;
 		label_hue_1.innerText = 'Fill Color: ' + (color);
 		slider_hue_2.value = color_number2;
 		label_hue_2.innerText = 'Stroke Color: ' + (color2);
 		slider_scale_variable.value = scale_number;
-		label_scale_variable.innerText = 'scale: ' + Number(scale_number).toFixed(3);
+		textboxScaleNumber.value = Number(scale_number).toFixed(4);
+		slider_scale_increment.value = scaleIncrement_number;
+		textboxScaleIncrementNumber.value = Number(scaleIncrement_number).toFixed(4);
 		slider_cp1x.value = cp1x_number;
-		label_cp1x.innerText = 'cp1x: ' + Number(cp1x_number).toFixed(2); 
+		textboxCp1xNumber.value = Number(cp1x_number).toFixed(2); 
 		slider_cp1y.value = cp1y_number;
-		label_cp1y.innerText = 'cp1y: ' + Number(cp1y_number).toFixed(2);
+		textboxCp1yNumber.value = Number(cp1y_number).toFixed(2);
 		slider_radian.value = radian_number;
 		degrees_number = (radian_number * (180/Math.PI));
 		textboxDegreesNumber.value = Number(degrees_number).toFixed(1);
 	}
 
-	updateSliders;
+	updateSliders();
 
 	window.addEventListener('resize', function(){
 		canvas.width = window.innerWidth;

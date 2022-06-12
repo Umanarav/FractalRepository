@@ -20,7 +20,7 @@
 	border:  2px solid white;
 	left:  21px;
 	top: 21px;
-	width: 610px;
+	width: 500px;
 	background: rgba(255,255,255,.13);
 	font-size: 13px;
 }
@@ -37,21 +37,15 @@
 	font-size: 13px;
 }
 #playButton {
+	right: 144px;
 	width: 100px;
+	background-color: transparent;
+	border-color: transparent;
 }
 #resetButton {
 	position: absolute;
-	right: 20px;
-	width: 60px;
-}
-#playButtonCcw {
-	width: 100px;
-}
-#sidesButton {
-	width: 80px;
-}
-#sidesDecreaseButton {
-	width: 80px;
+	right: 34px;
+	width: 89px;
 }
 #download {
 	width: 100px;
@@ -59,7 +53,54 @@
 
 #Hue_2 {
 }
-
+#spreadPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#spreadMinusButton {
+	width: 20px;
+	height:  22px;
+}
+#spreadIncrementPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#spreadIncrementMinusButton {
+	width: 20px;
+	height:  22px;
+}
+#sidesPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#sidesMinusButton {
+	width: 20px;
+	height:  22px;
+}
+#scalePlusButton {
+	width: 20px;
+	height:  22px;
+}
+#scaleMinusButton {
+	width: 20px;
+	height:  22px;
+}
+#scaleIncrementPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#scaleIncrementMinusButton {
+	width: 20px;
+	height:  22px;
+}
+#cp1xPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#cp1xMinusButton {
+	width: 20px;
+	height:  22px;
+}
 #cp1yPlusButton {
 	width: 20px;
 	height:  22px;
@@ -67,6 +108,34 @@
 #cp1yMinusButton {
 	width: 20px;
 	height:  22px;
+}
+#spreadBox {
+	color: black;
+	width: 89px;
+}
+#spreadIncrementBox {
+	color: black;
+	width: 89px;
+}
+#sidesBox {
+	color: black;
+	width: 55px;
+}
+#scaleBox {
+	color: black;
+	width: 65px;
+}
+#scaleIncrementBox {
+	color: black;
+	width: 70px;
+}
+#cp1xBox {
+	color: black;
+	width: 55px;
+}
+#cp1yBox {
+	color: black;
+	width: 55px;
 }
 #degrees-number {
 	color: black;
@@ -79,27 +148,6 @@
 #radianMinusButton {
 	width: 20px;
 	height:  22px;
-}
-#degreesPresets{
-	padding:  8px;
-	border:  2px solid white;
-	left:  21px;
-	top: 13px;
-	bottom: 13px;
-	width: 244px;
-	font-size: 13px;
-}
-#negativeGoldenRadianButton {
-	font-size: 13px;
-	width: 55px;
-}
-#goldenRadianButton {
-	font-size: 13px;
-	width: 55px;
-}
-#rotation89Button {
-	font-size: 13px;
-	width: 34px;
 }
 
 

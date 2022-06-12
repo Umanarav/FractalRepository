@@ -11,51 +11,74 @@
 	<canvas id="canvas1"></canvas>
 	<div id="controls">
 		<button id="randomizeButton">Randomize!</button>
+		<button id="playButton">&#x23EF;</button>
 		<button id="resetButton">Reset</button>
 		<div>
 			<input id="spread" type="range" min="-0.3" max="15" step="0.1" value="1">
 			<label for="spread">Spread: </label>
+			<input id="spreadBox"type="text" >
+			<button id="spreadMinusButton">-</button>
+			<button id="spreadPlusButton">+</button>
+		</div>
+		<div id="spread_increment">
+			<input id="spread_increment" type="range" min="-3" max="3" step="0.001" value="1">
+			<label for="spread_increment">Spread Increment: </label>
+			<input id="spreadIncrementBox"type="text" >
+			<button id="spreadIncrementMinusButton">-</button>
+			<button id="spreadIncrementPlusButton">+</button>
 		</div>
 		<div>
 			<input id="sides" type="range" min="1" max="144" step="1" value="5">
 			<label for="sides">Sides: </label>
+			<input id="sidesBox"type="text" >
+			<button id="sidesMinusButton">-</button>
+			<button id="sidesPlusButton">+</button>
 		</div>
 		<div>
 			<input id="Hue_1" type="range" min="1" max="359" step="1" value="5">
 			<label for="Hue_1">Fill Color </label>
 		</div>
 		<div>
-			<input id="Hue_2" type="range" min="0" max="359" step="1" value="5">
+			<input id="Hue_2" type="range" min="0" max="359" step="1" value="5"> 
 			<label for="Hue_2">Stroke Color </label>
 		</div>
 		<div id="scale_variable">
 			<input id="scale_variable" type="range" min="0" max="3" step="0.01" value="1">
 			<label for="scale_variable">Scale: </label>
+			<input id="scaleBox"type="text" >
+			<button id="scaleMinusButton">-</button>
+			<button id="scalePlusButton">+</button>
+		</div>
+		<div id="scale_increment">
+			<input id="scale_increment" type="range" min="-3" max="3" step="0.001" value="1">
+			<label for="scale_increment">Scale Increment: </label>
+			<input id="scaleIncrementBox"type="text" >
+			<button id="scaleIncrementMinusButton">-</button>
+			<button id="scaleIncrementPlusButton">+</button>
 		</div>
 		<div>
 			<input id="cp1x" type="range" min="0" max="255" step="1" value="1 ">
 			<label for="cp1x">cp1x:</label>
+			<input id="cp1xBox"type="text" >
+			<button id="cp1xMinusButton">-</button>
+			<button id="cp1xPlusButton">+</button>
 		</div>
 		<div>
-			<button id="cp1yMinusButton">-</button>
 			<input id="cp1y" type="range" min="0" max="255" step="1" value="1">
 			<label for="cp1y">cp1y:</label>
+			<input id="cp1yBox"type="text" >
+			<button id="cp1yMinusButton">-</button>
 			<button id="cp1yPlusButton">+</button>
 		</div>
 		<div>
-			<button id="radianMinusButton">-</button>
 			<input id="radian" type="range" min="-6.28319" max="6.28319" step="0.0174533" value="1">
 			<label for="radian">Rotation°:</label>
 			<input id="degrees-number" type="text" />
+			<button id="radianMinusButton">-</button>
 			<button id="radianPlusButton">+</button>
 		</div>
-		<button id="playButton">Play (CW)</button>
-		<button id="playButtonCcw">Play (CCW)</button>
-		<button id="sidesButton">Sides+</button>
-		<button id="sidesDecreaseButton">Sides-</button>
 		<button id="download">Download</button>
 		<button id="fullscreenButton">Fullscreen</button>
-		<button id="closeFullscreen">Un-Fullscreen</button>
 		<div>
 			<a href="index.html">Bezier Curve</a>
 			<a href="index2.html">Hexagons</a>
@@ -64,6 +87,7 @@
 	<div id="ToggleControls">
 		<button id="ToggleControlsButton">Toggle Controls</button>
 	</div>
+	<button id="playButton">&#x23EF;</button>
 	<div style="display:none;">
 		<img id="source"
 			src="image.png"
