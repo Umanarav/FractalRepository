@@ -77,6 +77,14 @@
 	width: 20px;
 	height:  22px;
 }
+#fractal_radianPlusButton {
+	width: 20px;
+	height:  22px;
+}
+#fractal_radianMinusButton {
+	width: 20px;
+	height:  22px;
+}
 #scalePlusButton {
 	width: 20px;
 	height:  22px;
@@ -118,6 +126,10 @@
 	width: 89px;
 }
 #sidesBox {
+	color: black;
+	width: 55px;
+}
+#fractal_radianBox {
 	color: black;
 	width: 55px;
 }
