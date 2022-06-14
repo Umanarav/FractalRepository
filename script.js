@@ -30,7 +30,6 @@ window.addEventListener('load', function(){
 	let cp1y_number = 95;
 	let scale_number = .9900;
 	let scaleIncrement_number = .0001;
-	let fractalradianIncrement_number = 0.0174533;
 	let lineWidth = 13;
 	let playing = false;
 	let sidesPlaying = false;
@@ -41,12 +40,14 @@ window.addEventListener('load', function(){
 	let rotateAngle = 0.0174533;
 	let radian_number = 0.0174533;
 	let fractal_radian_number = 2.3998277;
+	let fractal_radian_increment_number = 0;
+	let fractal_degrees_increment_number = 1;
 	let rafReference;
 	let textboxSpreadNumber = document.getElementById("spreadBox");
 	let textboxSpreadIncrementNumber = document.getElementById("spreadIncrementBox");
 	let textboxSidesNumber = document.getElementById("sidesBox");
 	let textboxFractalDegreesNumber = document.getElementById("fractal_radianBox");
-	let textboxFractalRadianIncrementNumber = document.getElementById("fractalradianIncrementBox");
+	let textboxFractalRadianIncrementNumber = document.getElementById("fractal_radian_incrementBox");
 	let textboxScaleNumber = document.getElementById("scaleBox");
 	let textboxScaleIncrementNumber = document.getElementById("scaleIncrementBox");
 	let textboxCp1xNumber = document.getElementById("cp1xBox");
@@ -66,6 +67,7 @@ window.addEventListener('load', function(){
 
 	const slider_spread = document.getElementById('spread');
 	const label_spread = document.querySelector('[for="spread"]');
+
 
 	slider_spread.addEventListener('change', function(e){
 		spread = parseFloat(e.target.value);
@@ -97,7 +99,8 @@ window.addEventListener('load', function(){
 	slider_fractal_radian_increment = document.getElementById('fractal_radian_increment');
 	label_fractal_radian_increment = document.querySelector('[for="fractal_radian_increment"]');
 	slider_fractal_radian_increment.addEventListener('change', function(e){
-		fractalradianIncrement_number = e.target.value;
+		fractal_radian_increment_number = e.target.value;
+		console.log(fractal_radian_increment_number);
 		updateSliders();
 		drawFractal();
 	});
@@ -273,22 +276,22 @@ window.addEventListener('load', function(){
 		drawFractal();
 	});
 	fractal_radianMinusButton.addEventListener('click', function(){
-		fractal_radian_number -= 0.0174533
+		fractal_radian_number -= fractal_radian_increment_number
 		updateSliders();
 		drawFractal();
 	});
 	fractal_radianPlusButton.addEventListener('click', function(){
-		fractal_radian_number += 0.0174533
+		fractal_radian_number += fractal_radian_increment_number
 		updateSliders();
 		drawFractal();
 	});
 	fractalradianIncrementMinusButton.addEventListener('click', function(){
-		fractalradianIncrement_number -= 0.0174533
+		fractal_radian_increment_number -= 0.000174533
 		updateSliders();
 		drawFractal();
 	});
 	fractalradianIncrementPlusButton.addEventListener('click', function(){
-		fractalradianIncrement_number += 0.0174533
+		fractal_radian_increment_number += 0.000174533
 		updateSliders();
 		drawFractal();
 	});
@@ -374,6 +377,7 @@ window.addEventListener('load', function(){
 		console.log(event);
 		if (event.key === 'Enter') {
 			fractal_radian_number = (document.getElementById("fractal_radianBox").value) * Math.PI/180;
+			console.log(fractal_radian_number);
 			console.log(fractal_degrees_number);
 			updateSliders();
 			drawFractal();
@@ -382,8 +386,7 @@ window.addEventListener('load', function(){
 	textboxFractalRadianIncrementNumber.addEventListener('keypress', (event) =>{
 		console.log(event);
 		if (event.key === 'Enter') {
-			fractalradianIncrement_number = document.getElementById("fractalradianIncrementBox").value;
-			console.log(fractalradianIncrement_number);
+			fractal_radian_increment_number = (document.getElementById("fractal_radian_incrementBox").value) * Math.PI/180;
 			updateSliders();
 			drawFractal();
 		}
@@ -443,7 +446,7 @@ window.addEventListener('load', function(){
 				color_numberDisplay += 1
 				rotateAngle += radian_number
 				scale_number += scaleIncrement_number
-				fractal_radian_number += fractalradianIncrement_number
+				fractal_radian_number += fractal_radian_increment_number
 				color = 'hsl('+ color_numberDisplay +' , 100%, 50%)';
 				updateSliders();
 				drawFractal();
@@ -487,9 +490,11 @@ window.addEventListener('load', function(){
 		slider_fractal_radian.value = fractal_radian_number;
 	 		fractal_degrees_number = (fractal_radian_number * (180/Math.PI));
 			textboxFractalDegreesNumber.value = Number(fractal_degrees_number).toFixed(1);
-		slider_fractal_radian_increment.value = fractalradianIncrement_number;
-			fractal_degrees_increment_number = (fractalradianIncrement_number * (180/Math.PI));
-			textboxFractalRadianIncrementNumber.value = Number(fractal_degrees_increment_number).toFixed(1);
+		
+		slider_fractal_radian_increment.value = fractal_radian_increment_number;
+	 		fractal_degrees_increment_number = (fractal_radian_increment_number * (180/Math.PI));
+			textboxFractalRadianIncrementNumber.value = Number(fractal_degrees_increment_number).toFixed(2);
+
 		slider_scale_increment.value = scaleIncrement_number;
 			textboxScaleIncrementNumber.value = Number(scaleIncrement_number).toFixed(4);
 		slider_hue_1.value = color_number;
